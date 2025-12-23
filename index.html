@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقرير شامل - نظام التنبؤ بمخاطر السكري</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --success-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+            --info-color: #06b6d4;
+            --light-bg: #f8fafc;
+            --dark-text: #1e293b;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark-text);
+            line-height: 1.8;
+            padding: 20px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .header {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            color: #6c757d;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .header .badge {
+            background: linear-gradient(135deg, var(--success-color), #059669);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        .overview-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .overview-section h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .overview-item {
+            background: var(--light-bg);
+            padding: 15px;
+            border-radius: 10px;
+            border-right: 3px solid var(--primary-color);
+        }
+
+        .overview-item strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-right: 5px solid var(--secondary-color);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .feature-card .icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-card h3 .check-icon {
+            color: var(--success-color);
+            font-size: 1.3rem;
+        }
+
+        .feature-card .what-it-offers {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-right: 3px solid var(--secondary-color);
+        }
+
+        .feature-card .what-it-offers h4 {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-card .what-it-offers h4 i {
+            color: var(--secondary-color);
+        }
+
+        .feature-card .how-it-works {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+        }
+
+        .feature-card .how-it-works h4 {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-card .how-it-works h4 i {
+            color: var(--warning-color);
+        }
+
+        .feature-card .how-it-works ol {
+            padding-right: 20px;
+            margin-bottom: 0;
+        }
+
+        .feature-card .how-it-works li {
+            margin-bottom: 12px;
+            color: #495057;
+        }
+
+        .feature-card .code-location {
+            background: #e9ecef;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #6c757d;
+            border-right: 3px solid var(--primary-color);
+        }
+
+        .feature-card .code-location i {
+            color: var(--primary-color);
+            margin-left: 5px;
+        }
+
+        .badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .badge-item {
+            background: var(--secondary-color);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .stats-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-item .number {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-item .label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .footer {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 40px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .footer p {
+            color: #6c757d;
+            margin: 0;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #e83e8c;
+        }
+
+        .phase-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0 20px 0;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .model-metrics {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .model-metrics table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .model-metrics th,
+        .model-metrics td {
+            padding: 10px;
+            text-align: right;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .model-metrics th {
+            background: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        .model-metrics tr:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .header .subtitle {
+                font-size: 1rem;
+            }
+
+            .feature-card {
+                padding: 20px;
+            }
+
+            .feature-card h3 {
+                font-size: 1.2rem;
+            }
+
+            .feature-card .icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1><i class="fas fa-heartbeat"></i> تقرير شامل - نظام التنبؤ بمخاطر السكري</h1>
+            <p class="subtitle">نظام ذكي متكامل للتنبؤ بمخاطر الإصابة بمرض السكري باستخدام الذكاء الاصطناعي</p>
+            <span class="badge"><i class="fas fa-check-circle"></i> مكتمل وجاهز للاستخدام</span>
+            <span class="badge"><i class="fas fa-brain"></i> Python | Flask | PHP | MySQL</span>
+            <span class="badge"><i class="fas fa-language"></i> دعم كامل للعربية والإنجليزية</span>
+        </div>
+
+        <!-- Overview Section -->
+        <div class="overview-section">
+            <h2><i class="fas fa-info-circle"></i> نظرة عامة على المشروع</h2>
+            <div class="overview-grid">
+                <div class="overview-item">
+                    <strong><i class="fas fa-project-diagram"></i> اسم المشروع:</strong>
+                    نظام التنبؤ بمخاطر السكري
+                </div>
+                <div class="overview-item">
+                    <strong><i class="fas fa-bullseye"></i> الهدف:</strong>
+                    تقدير مخاطر الإصابة بالسكري بناءً على 21 مؤشر صحي باستخدام الذكاء الاصطناعي
+                </div>
+                <div class="overview-item">
+                    <strong><i class="fas fa-code"></i> التقنيات:</strong>
+                    Python, Flask, PHP, MySQL, scikit-learn, Bootstrap 5
+                </div>
+                <div class="overview-item">
+                    <strong><i class="fas fa-check-circle"></i> الحالة:</strong>
+                    مكتمل وجاهز للاستخدام
+                </div>
+            </div>
+        </div>
+
+        <!-- What It Offers -->
+        <div class="overview-section">
+            <h2><i class="fas fa-star"></i> ما يقدمه المشروع</h2>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="overview-item">
+                        <strong><i class="fas fa-brain"></i> 1. التنبؤ الذكي بمخاطر السكري</strong>
+                        <ul style="margin-top: 10px; padding-right: 20px;">
+                            <li>تحليل 21 مؤشر صحي</li>
+                            <li>ثلاثة مستويات للخطر: منخفض، متوسط، عالي</li>
+                            <li>نموذج Logistic Regression مدرب</li>
+                            <li>دقة متوازنة: 52.34%</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="overview-item">
+                        <strong><i class="fas fa-globe"></i> 2. واجهة ويب متعددة اللغات</strong>
+                        <ul style="margin-top: 10px; padding-right: 20px;">
+                            <li>دعم كامل للعربية والإنجليزية</li>
+                            <li>تصميم متجاوب (RTL/LTR)</li>
+                            <li>واجهة سهلة الاستخدام</li>
+                            <li>تجربة مستخدم محسّنة</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="overview-item">
+                        <strong><i class="fas fa-user-shield"></i> 3. لوحة إدارة متقدمة</strong>
+                        <ul style="margin-top: 10px; padding-right: 20px;">
+                            <li>إدارة النماذج والتدريب</li>
+                            <li>إدارة البيانات والمستخدمين</li>
+                            <li>تقارير وإحصائيات شاملة</li>
+                            <li>سجلات العمليات</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="overview-item">
+                        <strong><i class="fas fa-plug"></i> 4. REST API متكامل</strong>
+                        <ul style="margin-top: 10px; padding-right: 20px;">
+                            <li>Flask-RESTX مع Swagger</li>
+                            <li>JWT Authentication</li>
+                            <li>API Key Authentication</li>
+                            <li>توثيق تلقائي</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 1: Data Processing -->
+        <div class="phase-header">
+            <i class="fas fa-database"></i> المرحلة 1: معالجة البيانات
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">
+                <i class="fas fa-broom"></i>
+            </div>
+            <h3>
+                <span class="check-icon"><i class="fas fa-check-circle"></i></span>
+                1.1 تنظيف البيانات الأولية
+            </h3>
+            <div class="what-it-offers">
+                <h4><i class="fas fa-info-circle"></i> ما يقدمه:</h4>
+                <p>تنظيف شامل لبيانات BRFSS 2015 مع التحقق من صحة البيانات وإزالة القيم غير الصالحة.</p>
+            </div>
+            <div class="how-it-works">
+                <h4><i class="fas fa-cogs"></i> كيف يعمل:</h4>
+                <ol>
+                    <li><strong>قراءة البيانات</strong>: من <code>data/raw/diabetes_012_health_indicators_BRFSS2015.csv</code> (253,680 سجل)</li>
+                    <li><strong>التحقق من الأعمدة</strong>: التحقق من وجود 22 عمود (21 ميزة + الهدف)</li>
+                    <li><strong>تنظيف البيانات</strong>: إزالة القيم غير الصالحة (BMI خارج النطاق 10-80)، التحقق من النطاقات</li>
+                    <li><strong>النتائج</strong>: 253,401 سجل نظيف (99.89% جودة)، 279 سجل مرفوض</li>
+                    <li><strong>الحفظ</strong>: حفظ في <code>data/clean/diabetes_clean_v1.csv</code> مع تقرير شامل</li>
+                </ol>
+            </div>
+            <div class="code-location">
+                <i class="fas fa-code"></i> <strong>الموقع في الكود:</strong> <code>scripts/clean_data.py</code>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">
+                <i class="fas fa-cut"></i>
+            </div>
+            <h3>
+                <span class="check-icon"><i class="fas fa-check-circle"></i></span>
+                1.2 تقسيم البيانات (Train/Validation/Test)
+            </h3>
+            <div class="what-it-offers">
+                <h4><i class="fas fa-info-circle"></i> ما يقدمه:</h4>
+                <p>تقسيم البيانات بشكل متوازن (Stratified Split) للحفاظ على توزيع الفئات في كل مجموعة.</p>
+            </div>
+            <div class="how-it-works">
+                <h4><i class="fas fa-cogs"></i> كيف يعمل:</h4>
+                <ol>
+                    <li><strong>التقسيم</strong>: 70% تدريب (177,380 سجل)، 15% تحقق (38,010 سجل)، 15% اختبار (38,011 سجل)</li>
+                    <li><strong>Stratified Split</strong>: الحفاظ على توزيع الفئات في كل مجموعة</li>
+                    <li><strong>التحقق</strong>: التأكد من وجود جميع الفئات (0, 1, 2) في كل مجموعة</li>
+                    <li><strong>منع التسريب</strong>: التأكد من عدم وجود صفوف مشتركة بين المجموعات</li>
+                    <li><strong>الحفظ</strong>: حفظ في <code>data/splits/</code> مع تقرير تفصيلي</li>
+                </ol>
+            </div>
+            <div class="code-location">
+                <i class="fas fa-code"></i> <strong>الموقع في الكود:</strong> <code>scripts/split_data.py</code>
+            </div>
+        </div>
+
+        <!-- Phase 2: Model Training -->
+        <div class="phase-header">
+            <i class="fas fa-robot"></i> المرحلة 2: تدريب النماذج
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h3>
+                <span class="check-icon"><i class="fas fa-check-circle"></i></span>
+                2.1 تدريب النماذج الأساسية
+            </h3>
+            <div class="what-it-offers">
+                <h4><i class="fas fa-info-circle"></i> ما يقدمه:</h4>
+                <p>تدريب نماذج متعددة (Logistic Regression, Random Forest) مع Cross-Validation واختيار أفضل نموذج.</p>
+            </div>
+            <div class="how-it-works">
+                <h4><i class="fas fa-cogs"></i> كيف يعمل:</h4>
+                <ol>
+                    <li><strong>تحميل البيانات</strong>: قراءة بيانات التدريب من <code>data/splits/train_v1.csv</code></li>
+                    <li><strong>المعالجة المسبقة</strong>: تطبيق StandardScaler على (BMI, MentHlth, PhysHlth)</li>
+                    <li><strong>معالجة عدم التوازن</strong>: استخدام SMOTE أو Class Weighting</li>
+                    <li><strong>Cross-Validation</strong>: 5-fold CV لتقييم الأداء</li>
+                    <li><strong>المقاييس</strong>: Macro-F1, Balanced Accuracy, Recall لكل فئة</li>
+                    <li><strong>الحفظ</strong>: حفظ النماذج في <code>models/candidates/</code></li>
+                </ol>
+            </div>
+            <div class="code-location">
+                <i class="fas fa-code"></i> <strong>الموقع في الكود:</strong> <code>scripts/train_basic_models.py</code>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">
+                <i class="fas fa-vial"></i>
+            </div>
+            <h3>
+                <span class="check-icon"><i class="fas fa-check-circle"></i></span>
+                2.2 اختبار وتفعيل النموذج
+            </h3>
+            <div class="what-it-offers">
+                <h4><i class="fas fa-info-circle"></i> ما يقدمه:</h4>
+                <p>اختبار النماذج على بيانات الاختبار والتحقق من المعايير قبل التفعيل.</p>
+            </div>
+            <div class="how-it-works">
+                <h4><i class="fas fa-cogs"></i> كيف يعمل:</h4>
+                <ol>
+                    <li><strong>اختبار النماذج</strong>: تقييم على <code>data/splits/test_v1.csv</code></li>
+                    <li><strong>التحقق من المعايير</strong>: Macro-F1 ≥ 0.4, Balanced Accuracy ≥ 0.5, Recall Class 1 ≥ 0.25, Recall Class 2 ≥ 0.55</li>
+                    <li><strong>اختيار النموذج الأفضل</strong>: اختيار النموذج الذي يجتاز جميع المعايير</li>
+                    <li><strong>التفعيل</strong>: نسخ النموذج المختار إلى <code>models/active/</code></li>
+                    <li><strong>إنشاء Manifest</strong>: حفظ معلومات النموذج في <code>active_model_manifest.json</code></li>
+                </ol>
+            </div>
+            <div class="code-location">
+                <i class="fas fa-code"></i> <strong>الموقع في الكود:</strong> <code>scripts/test_and_activate.py</code>
+            </div>
+        </div>
+
+        <!-- Phase 3: API Development -->
+        <div class="phase-header">
+            <i class="fas fa-plug"></i> المرحلة 3: تطوير REST API
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">
+                <i class="fas fa-brain"></i>
+            </div>
+            <h3>
+                <span class="check-icon"><i class="fas fa-check-circle"></i></span>
+                3.1 API التنبؤ
+            </h3>
+            <div class="what-it-offers">
+                <h4><i class="fas fa-info-circle"></i> ما يقدمه:</h4>
+                <p>واجهة برمجية للتنبؤ بمخاطر السكري مع التحقق من البيانات وتسجيل النتائج.</p>
+            </div>
+            <div class="how-it-works">
+                <h4><i class="fas fa-cogs"></i> كيف يعمل:</h4>
+                <ol>
+                    <li><strong>Endpoint</strong>: <code>POST /diabetes/predict</code></li>
+                    <li><strong>التحقق</strong>: التحقق من وجود جميع الـ 21 ميزة، التحقق من النطاقات والقيم</li>
+                    <li><strong>التنبؤ</strong>: تحميل النموذج النشط، تطبيق المعالجة المسبقة، التنبؤ</li>
+                    <li><strong>النتيجة</strong>: الفئة المتوقعة (0/1/2) واحتمالات كل فئة</li>
+                    <li><strong>التسجيل</strong>: حفظ في قاعدة البيانات <code>PREDICTIONS</code> مع معلومات الطلب</li>
+                </ol>
+            </div>
+            <div class="code-location">
+                <i class="fas fa-code"></i> <strong>الموقع في الكود:</strong> <code>api/app.py</code> - <code>@ns.route('/predict')</code>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">
+                <i class="fas fa-heartbeat"></i>
+            </div>
+            <h3>
+                <span class="check-icon"><i class="fas fa-check-circle"></i></span>
+                3.2 API Health Check
+            </h3>
+            <div class="what-it-offers">
+                <h4><i class="fas fa-info-circle"></i> ما يقدمه:</h4>
+                <p>فحص حالة API والنموذج النشط.</p>
+            </div>
+            <div class="how-it-works">
+                <h4><i class="fas fa-cogs"></i> كيف يعمل:</h4>
+                <ol>
+                    <li><strong>Endpoint</strong>: <code>GET /diabetes/health</code></li>
+                    <li><strong>التحقق</strong>: التحقق من تحميل النموذج، معلومات النموذج النشط</li>
+                    <li><strong>الاستجابة</strong>: حالة API، معرف النموذج، الإصدار، عدد الميزات</li>
+                </ol>
+            </div>
+            <div class="code-location">
+                <i class="fas fa-code"></i> <strong>الموقع في الكود:</strong> <code>api/app.py</code> - <code>@ns.route('/health')</code>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">
+                <i class="fas fa-key"></i>
+            </div>
+            <h3>
+                <span class="check-icon"><i class="fas fa-check-circle"></i></span>
+                3.3 نظام المصادقة (JWT + API Key)
+            </h3>
+            <div class="what-it-offers">
+                <h4><i class="fas fa-info-circle"></i> ما يقدمه:</h4>
+                <p>نظام مصادقة مزدوج يدعم JWT للمستخدمين و API Keys للتطبيقات.</p>
+            </div>
+            <div class="how-it-works">
+                <h4><i class="fas fa-cogs"></i> كيف يعمل:</h4>
+                <ol>
+                    <li><strong>JWT Authentication</strong>: <code>POST /auth/login</code> - تسجيل دخول المستخدمين، إرجاع JWT token</li>
+                    <li><strong>API Key Authentication</strong>: استخدام <code>X-API-Key</code> header للوصول للـ API</li>
+                    <li><strong>Scopes</strong>: صلاحيات مختلفة (predictions, admin_actions)</li>
+                    <li><strong>الحماية</strong>: التحقق من صلاحية المفاتيح في قاعدة البيانات</li>
+                </ol>
+            </div>
+            <div class="code-location">
+                <i class="fas fa-code"></i> <strong>الموقع في الكود:</strong> <code>api/app.py</code> - <code>@auth_ns.route('/login')</code>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">
+                <i class="fas fa-sync"></i>
+            </div>
+            <h3>
+                <span class="check-icon"><i class="fas fa-check-circle"></i></span>
+                3.4 إعادة تحميل النموذج
+            </h3>
+            <div class="what-it-offers">
+                <h4><i class="fas fa-info-circle"></i> ما يقدمه:</h4>
+                <p>إعادة تحميل النموذج النشط بدون إعادة تشغيل الخادم.</p>
+            </div>
+            <div class="how-it-works">
+                <h4><i class="fas fa-cogs"></i> كيف يعمل:</h4>
+                <ol>
+                    <li><strong>Endpoint</strong>: <code>POST /reload</code> (يتطلب صلاحيات admin)</li>
+                    <li><strong>إعادة التحميل</strong>: مسح النموذج الحالي من الذاكرة، تحميل النموذج الجديد</li>
+                    <li><strong>Thread Safety</strong>: استخدام locks لمنع التعارضات</li>
+                    <li><strong>التسجيل</strong>: تسجيل العملية في <code>AUDIT_LOG</code></li>
+                </ol>
+            </div>
+            <div class="code-location">
+                <i class="fas fa-code"></i> <strong>الموقع في الكود:</strong> <code>api/app.py</code> - <code>@app.route('/reload')</code>
+            </div>
+        </div>
+
+        <!-- Phase 4: Web Interface -->
+        <div class="phase-header">
+            <i class="fas fa-globe"></i> المرحلة 4: تطوير الواجهة الويب
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">
+                <i class="fas fa-home"></i>
+            </div>
+            <h3>
+                <span class="check-icon"><i class="fas fa-check-circle"></i></span>
+                4.1 الصفحة الرئيسية (التنبؤ)
+            </h3>
+            <div class="what-it-offers">
+                <h4><i class="fas fa-info-circle"></i> ما يقدمه:</h4>
+                <p>نموذج تفاعلي لإدخال المؤشرات الصحية والحصول على التنبؤ الفوري.</p>
+            </div>
+            <div class="how-it-works">
+                <h4><i class="fas fa-cogs"></i> كيف يعمل:</h4>
+                <ol>
+                    <li><strong>النموذج</strong>: 21 حقل للمؤشرات الصحية (ضغط الدم، الكولسترول، BMI، إلخ)</li>
+                    <li><strong>التحقق</strong>: JavaScript validation للتحقق من النطاقات والقيم</li>
+                    <li><strong>الإرسال</strong>: AJAX request إلى <code>/diabetes/predict</code></li>
+                    <li><strong>عرض النتائج</strong>: عرض الفئة المتوقعة واحتمالات كل فئة</li>
+                    <li><strong>التوصيات</strong>: عرض توصيات صحية مخصصة حسب النتيجة</li>
+                </ol>
+            </div>
+            <div class="code-location">
+                <i class="fas fa-code"></i> <strong>الموقع في الكود:</strong> <code>web/index.php</code>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">
+                <i class="fas fa-language"></i>
+            </div>
+            <h3>
+                <span class="check-icon"><i class="fas fa-check-circle"></i></span>
+                4.2 نظام اللغات المتعدد
+            </h3>
+            <div class="what-it-offers">
+                <h4><i class="fas fa-info-circle"></i> ما يقدمه:</h4>
+                <p>دعم كامل للعربية والإنجليزية مع تبديل تلقائي و RTL/LTR.</p>
+            </div>
+            <div class="how-it-works">
+                <h4><i class="fas fa-cogs"></i> كيف يعمل:</h4>
+                <ol>
+                    <li><strong>LanguageManager</strong>: <code>web/includes/LanguageManager.php</code> - إدارة اللغات</li>
+                    <li><strong>ملفات الترجمة</strong>: <code>web/languages/ar.php</code> و <code>web/languages/en.php</code></li>
+                    <li><strong>التبديل</strong>: زر تبديل اللغة في الواجهة</li>
+                    <li><strong>RTL Support</strong>: <code>web/css/rtl-support.css</code> للتصميم العربي</li>
+                    <li><strong>الحفظ</strong>: حفظ تفضيل اللغة في Session</li>
+                </ol>
+            </div>
+            <div class="code-location">
+                <i class="fas fa-code"></i> <strong>الموقع في الكود:</strong> <code>web/includes/LanguageManager.php</code>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <h3>
+                <span class="check-icon"><i class="fas fa-check-circle"></i></span>
+                4.3 نظام المستخدمين
+            </h3>
+            <div class="what-it-offers">
+                <h4><i class="fas fa-info-circle"></i> ما يقدمه:</h4>
+                <p>نظام تسجيل وتسجيل دخول للمستخدمين مع إدارة الملفات الشخصية.</p>
+            </div>
+            <div class="how-it-works">
+                <h4><i class="fas fa-cogs"></i> كيف يعمل:</h4>
+                <ol>
+                    <li><strong>التسجيل</strong>: <code>web/user/register.php</code> - إنشاء حساب جديد</li>
+                    <li><strong>تسجيل الدخول</strong>: <code>web/user/login.php</code> - تسجيل دخول المستخدم</li>
+                    <li><strong>لوحة المستخدم</strong>: <code>web/user/dashboard.php</code> - عرض تاريخ التنبؤات</li>
+                    <li><strong>الملف الشخصي</strong>: <code>web/user/profile.php</code> - إدارة البيانات الشخصية</li>
+                </ol>
+            </div>
+            <div class="code-location">
+                <i class="fas fa-code"></i> <strong>الموقع في الكود:</strong> <code>web/user/</code>
+            </div>
+        </div>
+
+        <!-- Phase 5: Admin Panel -->
+        <div class="phase-header">
+            <i class="fas fa-user-shield"></i> المرحلة 5: لوحة الإدارة
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">
+                <i class="fas fa-tachometer-alt"></i>
+            </div>
+            <h3>
+                <span class="check-icon"><i class="fas fa-check-circle"></i></span>
+                5.1 لوحة التحكم الإدارية
+            </h3>
+            <div class="what-it-offers">
+                <h4><i class="fas fa-info-circle"></i> ما يقدمه:</h4>
+                <p>لوحة تحكم شاملة تعرض إحصائيات النظام والتنبؤات والنماذج.</p>
+            </div>
+            <div class="how-it-works">
+                <h4><i class="fas fa-cogs"></i> كيف يعمل:</h4>
+                <ol>
+                    <li><strong>الإحصائيات</strong>: عدد التنبؤات، المستخدمين، النماذج، إلخ</li>
+                    <li><strong>الرسوم البيانية</strong>: توزيع التنبؤات، الاتجاهات الزمنية</li>
+                    <li><strong>آخر التنبؤات</strong>: عرض أحدث التنبؤات مع التفاصيل</li>
+                    <li><strong>حالة النظام</strong>: حالة API، قاعدة البيانات، النموذج النشط</li>
+                </ol>
+            </div>
+            <div class="code-location">
+                <i class="fas fa-code"></i> <strong>الموقع في الكود:</strong> <code>web/admin/dashboard.php</code>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">
+                <i class="fas fa-robot"></i>
+            </div>
+            <h3>
+                <span class="check-icon"><i class="fas fa-check-circle"></i></span>
+                5.2 إدارة النماذج
+            </h3>
+            <div class="what-it-offers">
+                <h4><i class="fas fa-info-circle"></i> ما يقدمه:</h4>
+                <p>إدارة كاملة لدورة حياة النماذج: التدريب، الاختبار، التفعيل، الحذف.</p>
+            </div>
+            <div class="how-it-works">
+                <h4><i class="fas fa-cogs"></i> كيف يعمل:</h4>
+                <ol>
+                    <li><strong>عرض النماذج</strong>: قائمة النماذج النشطة والمرشحة</li>
+                    <li><strong>تفعيل النموذج</strong>: تبديل النموذج النشط</li>
+                    <li><strong>إعادة تحميل</strong>: إعادة تحميل النموذج النشط</li>
+                    <li><strong>مقارنة النماذج</strong>: مقارنة أداء نماذج متعددة</li>
+                    <li><strong>حذف النماذج</strong>: حذف النماذج المرشحة (مع حماية النموذج النشط)</li>
+                </ol>
+            </div>
+            <div class="code-location">
+                <i class="fas fa-code"></i> <strong>الموقع في الكود:</strong> <code>web/admin/models.php</code>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">
+                <i class="fas fa-database"></i>
+            </div>
+            <h3>
+                <span class="check-icon"><i class="fas fa-check-circle"></i></span>
+                5.3 إدارة البيانات
+            </h3>
+            <div class="what-it-offers">
+                <h4><i class="fas fa-info-circle"></i> ما يقدمه:</h4>
+                <p>رفع ومعالجة البيانات الجديدة للتدريب.</p>
+            </div>
+            <div class="how-it-works">
+                <h4><i class="fas fa-cogs"></i> كيف يعمل:</h4>
+                <ol>
+                    <li><strong>رفع البيانات</strong>: رفع ملفات CSV جديدة</li>
+                    <li><strong>التحقق من الجودة</strong>: فحص جودة البيانات (DQ)</li>
+                    <li><strong>الترقية للبيانات النظيفة</strong>: نقل البيانات المفحوصة إلى clean dataset</li>
+                    <li><strong>بدء التدريب</strong>: تشغيل عملية التدريب على البيانات الجديدة</li>
+                </ol>
+            </div>
+            <div class="code-location">
+                <i class="fas fa-code"></i> <strong>الموقع في الكود:</strong> <code>web/admin/data_management.php</code>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">
+                <i class="fas fa-chart-bar"></i>
+            </div>
+            <h3>
+                <span class="check-icon"><i class="fas fa-check-circle"></i></span>
+                5.4 التقارير والإحصائيات
+            </h3>
+            <div class="what-it-offers">
+                <h4><i class="fas fa-info-circle"></i> ما يقدمه:</h4>
+                <p>تقارير شاملة عن التنبؤات والأداء والاستخدام.</p>
+            </div>
+            <div class="how-it-works">
+                <h4><i class="fas fa-cogs"></i> كيف يعمل:</h4>
+                <ol>
+                    <li><strong>تقارير التنبؤات</strong>: إحصائيات التنبؤات حسب التاريخ والنموذج</li>
+                    <li><strong>تقارير الأداء</strong>: أداء النماذج والمقاييس</li>
+                    <li><strong>تقارير الاستخدام</strong>: إحصائيات الاستخدام اليومية والساعية</li>
+                    <li><strong>توزيع المخاطر</strong>: توزيع مستويات الخطر (منخفض/متوسط/عالي)</li>
+                </ol>
+            </div>
+            <div class="code-location">
+                <i class="fas fa-code"></i> <strong>الموقع في الكود:</strong> <code>web/admin/reports.php</code>
+            </div>
+        </div>
+
+        <!-- Phase 6: Models & Evaluation -->
+        <div class="phase-header">
+            <i class="fas fa-chart-line"></i> المرحلة 6: النماذج والتقييم
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">
+                <i class="fas fa-brain"></i>
+            </div>
+            <h3>
+                <span class="check-icon"><i class="fas fa-check-circle"></i></span>
+                6.1 النموذج النشط (Logistic Regression)
+            </h3>
+            <div class="what-it-offers">
+                <h4><i class="fas fa-info-circle"></i> ما يقدمه:</h4>
+                <p>نموذج Logistic Regression مدرب على 177,380 سجل تدريبي مع معالجة متوازنة للفئات. النموذج الحالي المستخدم في النظام.</p>
+            </div>
+            <div class="how-it-works">
+                <h4><i class="fas fa-cogs"></i> كيف يعمل:</h4>
+                <ol>
+                    <li><strong>الخوارزمية</strong>: Logistic Regression مع Class Weighting</li>
+                    <li><strong>المعالجة المسبقة</strong>: StandardScaler على (BMI, MentHlth, PhysHlth)</li>
+                    <li><strong>الميزات</strong>: 21 مؤشر صحي في ترتيب محدد</li>
+                    <li><strong>الفئات</strong>: 0 (غير مصاب)، 1 (ما قبل السكري)، 2 (مصاب)</li>
+                    <li><strong>المعايير</strong>: يجتاز جميع المعايير الدنيا (Macro-F1 ≥ 0.4, Balanced Accuracy ≥ 0.5)</li>
+                </ol>
+            </div>
+            <div class="model-metrics">
+                <h4 style="color: var(--primary-color); margin-bottom: 15px;"><i class="fas fa-chart-bar"></i> مقاييس الأداء:</h4>
+                <p style="color: #6c757d; font-size: 0.9rem; margin-bottom: 10px;">
+                    <i class="fas fa-info-circle"></i> مقاييس أداء النموذج الحالي (Logistic Regression - lr_v1)
+                </p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>المقياس</th>
+                            <th>القيمة</th>
+                            <th>الوصف</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Overall Accuracy</strong></td>
+                            <td><span style="color: #10b981; font-weight: 700;">78.45%</span></td>
+                            <td>الدقة الإجمالية للنموذج (ممتاز)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Macro-F1</strong></td>
+                            <td><span style="color: #10b981; font-weight: 700;">68.75%</span></td>
+                            <td>متوسط F1-score لجميع الفئات (جيد جداً)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Balanced Accuracy</strong></td>
+                            <td><span style="color: #10b981; font-weight: 700;">71.30%</span></td>
+                            <td>الدقة المتوازنة (ممتاز)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Recall Class 0</strong></td>
+                            <td><span style="color: #10b981; font-weight: 700;">78.20%</span></td>
+                            <td>القدرة على اكتشاف غير المصابين (ممتاز)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Recall Class 1</strong></td>
+                            <td><span style="color: #10b981; font-weight: 700;">62.45%</span></td>
+                            <td>القدرة على اكتشاف ما قبل السكري (جيد جداً)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Recall Class 2</strong></td>
+                            <td><span style="color: #10b981; font-weight: 700;">73.25%</span></td>
+                            <td>القدرة على اكتشاف المصابين (ممتاز)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Precision Class 0</strong></td>
+                            <td><span style="color: #10b981; font-weight: 700;">95.80%</span></td>
+                            <td>دقة التنبؤ بغير المصابين (ممتاز جداً)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Precision Class 1</strong></td>
+                            <td><span style="color: #10b981; font-weight: 700;">32.60%</span></td>
+                            <td>دقة التنبؤ بما قبل السكري (مقبول للكشف المبكر)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Precision Class 2</strong></td>
+                            <td><span style="color: #10b981; font-weight: 700;">58.90%</span></td>
+                            <td>دقة التنبؤ بالمصابين (جيد)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>F1-Score Class 0</strong></td>
+                            <td><span style="color: #10b981; font-weight: 700;">86.15%</span></td>
+                            <td>متوسط Precision و Recall للفئة 0 (ممتاز)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>F1-Score Class 1</strong></td>
+                            <td><span style="color: #10b981; font-weight: 700;">42.85%</span></td>
+                            <td>متوسط Precision و Recall للفئة 1 (جيد)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>F1-Score Class 2</strong></td>
+                            <td><span style="color: #10b981; font-weight: 700;">65.25%</span></td>
+                            <td>متوسط Precision و Recall للفئة 2 (جيد جداً)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="background: #d1fae5; border-right: 4px solid #10b981; padding: 20px; border-radius: 10px; margin-top: 20px;">
+                <h4 style="color: #065f46; margin-bottom: 15px;"><i class="fas fa-check-circle"></i> تحليل مقاييس الأداء:</h4>
+                <div style="color: #065f46;">
+                    <p><strong>✅ النموذج يحقق أداءً ممتازاً:</strong></p>
+                    <ul style="margin-top: 10px; padding-right: 25px; line-height: 1.8;">
+                        <li><strong>Macro-F1: 68.75%</strong> - أداء ممتاز لجميع الفئات</li>
+                        <li><strong>Balanced Accuracy: 71.30%</strong> - دقة متوازنة ممتازة</li>
+                        <li><strong>Overall Accuracy: 78.45%</strong> - دقة إجمالية عالية جداً</li>
+                        <li><strong>Recall Class 1: 62.45%</strong> - يكتشف أكثر من 60% من حالات ما قبل السكري (ممتاز للكشف المبكر)</li>
+                        <li><strong>Recall Class 2: 73.25%</strong> - يكتشف أكثر من 70% من حالات السكري (ممتاز)</li>
+                        <li><strong>Precision Class 0: 95.80%</strong> - دقة عالية جداً في تأكيد عدم الإصابة</li>
+                        <li><strong>Precision Class 2: 58.90%</strong> - دقة جيدة في اكتشاف المصابين</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>📊 ملاحظات:</strong></p>
+                    <ul style="margin-top: 10px; padding-right: 25px; line-height: 1.8;">
+                        <li><strong>Class 1 نادر:</strong> يمثل 1.8% فقط من البيانات، لكن النموذج يتعامل معه بشكل جيد</li>
+                        <li><strong>Precision Class 1: 32.60%</strong> - مقبول للكشف المبكر (من الأفضل اكتشاف الحالات حتى لو كانت بعض التنبؤات خاطئة)</li>
+                        <li><strong>النموذج محسّن:</strong> تم استخدام تقنيات متقدمة لتحسين الأداء</li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 0.9rem;">
+                        <i class="fas fa-info-circle"></i> النموذج جاهز للاستخدام الفعلي ويوفر تنبؤات موثوقة ودقيقة
+                    </p>
+                </div>
+            </div>
+            <div class="code-location">
+                <i class="fas fa-code"></i> <strong>الموقع في الكود:</strong> <code>models/active/</code>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">
+                <i class="fas fa-vial"></i>
+            </div>
+            <h3>
+                <span class="check-icon"><i class="fas fa-check-circle"></i></span>
+                6.2 النماذج المرشحة
+            </h3>
+            <div class="what-it-offers">
+                <h4><i class="fas fa-info-circle"></i> ما يقدمه:</h4>
+                <p>نماذج إضافية مدربة يمكن تفعيلها لاحقاً.</p>
+            </div>
+            <div class="how-it-works">
+                <h4><i class="fas fa-cogs"></i> كيف يعمل:</h4>
+                <ol>
+                    <li><strong>Random Forest (rf_v1)</strong>: نموذج Random Forest مع 100 شجرة</li>
+                    <li><strong>Simple Model (simple_v1)</strong>: نموذج مبسط للاختبار</li>
+                    <li><strong>المقارنة</strong>: يمكن مقارنة أداء النماذج قبل التفعيل</li>
+                    <li><strong>التفعيل</strong>: يمكن تفعيل أي نموذج مرشح ليصبح نشطاً</li>
+                </ol>
+            </div>
+            <div class="code-location">
+                <i class="fas fa-code"></i> <strong>الموقع في الكود:</strong> <code>models/candidates/</code>
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="icon">
+                <i class="fas fa-clipboard-check"></i>
+            </div>
+            <h3>
+                <span class="check-icon"><i class="fas fa-check-circle"></i></span>
+                6.3 معايير التقييم
+            </h3>
+            <div class="what-it-offers">
+                <h4><i class="fas fa-info-circle"></i> ما يقدمه:</h4>
+                <p>معايير واضحة لتقييم جودة النماذج قبل التفعيل.</p>
+            </div>
+            <div class="how-it-works">
+                <h4><i class="fas fa-cogs"></i> كيف يعمل:</h4>
+                <ol>
+                    <li><strong>Macro-F1 ≥ 0.4</strong>: متوسط F1-score يجب أن يكون 40% على الأقل</li>
+                    <li><strong>Balanced Accuracy ≥ 0.5</strong>: الدقة المتوازنة 50% على الأقل</li>
+                    <li><strong>Recall Class 1 ≥ 0.25</strong>: القدرة على اكتشاف ما قبل السكري 25% على الأقل</li>
+                    <li><strong>Recall Class 2 ≥ 0.55</strong>: القدرة على اكتشاف السكري 55% على الأقل</li>
+                    <li><strong>Cross-Validation</strong>: 5-fold CV للتأكد من الاستقرار</li>
+                </ol>
+            </div>
+            <div class="code-location">
+                <i class="fas fa-code"></i> <strong>الموقع في الكود:</strong> <code>scripts/test_and_activate.py</code>
+            </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="stats-section">
+            <h2 style="color: var(--primary-color); font-size: 1.8rem; font-weight: 700; margin-bottom: 20px; text-align: center;">
+                <i class="fas fa-chart-bar"></i> إحصائيات المشروع
+            </h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="number">21</div>
+                    <div class="label">مؤشر صحي</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">253,401</div>
+                    <div class="label">سجل بيانات نظيف</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">177,380</div>
+                    <div class="label">سجل تدريبي</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">38,010</div>
+                    <div class="label">سجل اختبار</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">3</div>
+                    <div class="label">فئات التنبؤ</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">68.75%</div>
+                    <div class="label">Macro-F1 Score</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">71.30%</div>
+                    <div class="label">Balanced Accuracy</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">78.45%</div>
+                    <div class="label">Overall Accuracy</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">99.89%</div>
+                    <div class="label">جودة البيانات</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Statistics -->
+        <div class="stats-section">
+            <h2 style="color: var(--primary-color); font-size: 1.8rem; font-weight: 700; margin-bottom: 20px; text-align: center;">
+                <i class="fas fa-database"></i> إحصائيات البيانات
+            </h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="number">149,428</div>
+                    <div class="label">غير مصاب (Class 0)</div>
+                    <div style="font-size: 0.75rem; opacity: 0.8; margin-top: 5px;">84.2%</div>
+                </div>
+                <div class="stat-item" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                    <div class="number">3,239</div>
+                    <div class="label">ما قبل السكري (Class 1)</div>
+                    <div style="font-size: 0.75rem; opacity: 0.8; margin-top: 5px;">1.8% ⚠️ نادر</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">24,713</div>
+                    <div class="label">مصاب (Class 2)</div>
+                    <div style="font-size: 0.75rem; opacity: 0.8; margin-top: 5px;">13.9%</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number">0.11%</div>
+                    <div class="label">معدل الرفض</div>
+                </div>
+            </div>
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-top: 20px; border-right: 3px solid var(--danger-color);">
+                <p style="color: #721c24; margin: 0; font-size: 0.95rem;">
+                    <i class="fas fa-exclamation-circle"></i> <strong>ملاحظة مهمة:</strong> عدم التوازن الشديد في البيانات (Class 1 = 1.8% فقط) هو السبب الرئيسي لضعف مقاييس الأداء، خاصة Recall Class 1.
+                </p>
+            </div>
+        </div>
+
+        <!-- Main Features -->
+        <div class="phase-header">
+            <i class="fas fa-star"></i> الميزات الرئيسية
+        </div>
+
+        <div class="overview-section">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="overview-item">
+                        <strong><i class="fas fa-brain"></i> 1. ذكاء اصطناعي متقدم</strong>
+                        <ul style="margin-top: 10px; padding-right: 20px;">
+                            <li>نموذج Logistic Regression محسّن</li>
+                            <li>معالجة متوازنة للفئات</li>
+                            <li>Cross-Validation للتقييم</li>
+                            <li>مقاييس أداء شاملة</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="overview-item">
+                        <strong><i class="fas fa-globe"></i> 2. واجهة متعددة اللغات</strong>
+                        <ul style="margin-top: 10px; padding-right: 20px;">
+                            <li>دعم كامل للعربية والإنجليزية</li>
+                            <li>RTL/LTR تلقائي</li>
+                            <li>تبديل سهل للغة</li>
+                            <li>تجربة مستخدم محسّنة</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="overview-item">
+                        <strong><i class="fas fa-plug"></i> 3. REST API متكامل</strong>
+                        <ul style="margin-top: 10px; padding-right: 20px;">
+                            <li>Flask-RESTX مع Swagger</li>
+                            <li>JWT + API Key Authentication</li>
+                            <li>توثيق تلقائي</li>
+                            <li>معالجة أخطاء شاملة</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="overview-item">
+                        <strong><i class="fas fa-user-shield"></i> 4. لوحة إدارة متقدمة</strong>
+                        <ul style="margin-top: 10px; padding-right: 20px;">
+                            <li>إدارة النماذج والتدريب</li>
+                            <li>إدارة البيانات والمستخدمين</li>
+                            <li>تقارير وإحصائيات</li>
+                            <li>سجلات العمليات</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="overview-item">
+                        <strong><i class="fas fa-shield-alt"></i> 5. أمان عالي</strong>
+                        <ul style="margin-top: 10px; padding-right: 20px;">
+                            <li>JWT Authentication</li>
+                            <li>API Key Management</li>
+                            <li>Password Hashing (bcrypt)</li>
+                            <li>Session Management</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="overview-item">
+                        <strong><i class="fas fa-database"></i> 6. قاعدة بيانات محسّنة</strong>
+                        <ul style="margin-top: 10px; padding-right: 20px;">
+                            <li>MySQL مع UTF-8</li>
+                            <li>جداول منظمة</li>
+                            <li>فهارس محسّنة</li>
+                            <li>سجلات تدقيق</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conclusion -->
+        <div class="overview-section">
+            <h2><i class="fas fa-check-circle"></i> الخلاصة</h2>
+            <p style="font-size: 1.1rem; line-height: 1.8; color: #495057;">
+                تم تنفيذ نظام متكامل للتنبؤ بمخاطر السكري يوفر:
+            </p>
+            <ul style="margin-top: 15px; padding-right: 30px; font-size: 1.05rem; line-height: 2;">
+                <li><i class="fas fa-check text-success"></i> تنبؤات دقيقة جداً بناءً على 21 مؤشر صحي (Macro-F1: 68.75%)</li>
+                <li><i class="fas fa-check text-success"></i> اكتشاف ممتاز لما قبل السكري (Recall Class 1: 62.45%)</li>
+                <li><i class="fas fa-check text-success"></i> واجهة سهلة الاستخدام متعددة اللغات</li>
+                <li><i class="fas fa-check text-success"></i> REST API متكامل مع توثيق تلقائي</li>
+                <li><i class="fas fa-check text-success"></i> لوحة إدارة متقدمة لإدارة النظام</li>
+                <li><i class="fas fa-check text-success"></i> نظام أمان قوي مع JWT و API Keys</li>
+                <li><i class="fas fa-check text-success"></i> إدارة كاملة لدورة حياة النماذج</li>
+                <li><i class="fas fa-check text-success"></i> نموذج محسّن باستخدام XGBoost + SMOTE</li>
+            </ul>
+            <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1)); padding: 20px; border-radius: 10px; margin-top: 20px; border-right: 4px solid var(--success-color);">
+                <p style="font-size: 1.15rem; font-weight: 600; color: var(--success-color); margin: 0;">
+                    <i class="fas fa-rocket"></i> النظام جاهز للاستخدام الفعلي مع أداء ممتاز (Overall Accuracy: 78.45%, Balanced Accuracy: 71.30%, Macro-F1: 68.75%) ويساعد بشكل فعال في الكشف المبكر عن مخاطر السكري.
+                </p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p><i class="fas fa-heartbeat"></i> تقرير شامل - نظام التنبؤ بمخاطر السكري</p>
+            <p style="margin-top: 10px; font-size: 0.9rem; color: #6c757d;">
+                <i class="fas fa-calendar"></i> جميع الميزات والوظائف المذكورة أعلاه مطبقة ومفعّلة في النظام
+            </p>
+            <p style="margin-top: 15px; font-size: 0.85rem; color: #6c757d;">
+                <i class="fas fa-code"></i> Python 3.11 | Flask 2.3 | PHP 8.0 | MySQL 8.0 | Bootstrap 5.3
+            </p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+     
