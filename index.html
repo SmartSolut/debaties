@@ -896,7 +896,7 @@
             </h3>
             <div class="what-it-offers">
                 <h4><i class="fas fa-info-circle"></i> ما يقدمه:</h4>
-                <p>نموذج Logistic Regression مدرب على 177,380 سجل تدريبي مع معالجة متوازنة للفئات. النموذج الحالي المستخدم في النظام.</p>
+                <p>نموذج Logistic Regression مدرب على 177,380 سجل تدريبي مع معالجة متوازنة للفئات.</p>
             </div>
             <div class="how-it-works">
                 <h4><i class="fas fa-cogs"></i> كيف يعمل:</h4>
@@ -905,14 +905,10 @@
                     <li><strong>المعالجة المسبقة</strong>: StandardScaler على (BMI, MentHlth, PhysHlth)</li>
                     <li><strong>الميزات</strong>: 21 مؤشر صحي في ترتيب محدد</li>
                     <li><strong>الفئات</strong>: 0 (غير مصاب)، 1 (ما قبل السكري)، 2 (مصاب)</li>
-                    <li><strong>المعايير</strong>: يجتاز جميع المعايير الدنيا (Macro-F1 ≥ 0.4, Balanced Accuracy ≥ 0.5)</li>
                 </ol>
             </div>
             <div class="model-metrics">
                 <h4 style="color: var(--primary-color); margin-bottom: 15px;"><i class="fas fa-chart-bar"></i> مقاييس الأداء:</h4>
-                <p style="color: #6c757d; font-size: 0.9rem; margin-bottom: 10px;">
-                    <i class="fas fa-info-circle"></i> مقاييس أداء النموذج الحالي (Logistic Regression - lr_v1)
-                </p>
                 <table>
                     <thead>
                         <tr>
@@ -923,89 +919,62 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><strong>Overall Accuracy</strong></td>
-                            <td><span style="color: #10b981; font-weight: 700;">78.45%</span></td>
-                            <td>الدقة الإجمالية للنموذج (ممتاز)</td>
-                        </tr>
-                        <tr>
                             <td><strong>Macro-F1</strong></td>
-                            <td><span style="color: #10b981; font-weight: 700;">68.75%</span></td>
-                            <td>متوسط F1-score لجميع الفئات (جيد جداً)</td>
+                            <td>42.78%</td>
+                            <td>متوسط F1-score لجميع الفئات</td>
                         </tr>
                         <tr>
                             <td><strong>Balanced Accuracy</strong></td>
-                            <td><span style="color: #10b981; font-weight: 700;">71.30%</span></td>
-                            <td>الدقة المتوازنة (ممتاز)</td>
+                            <td>52.34%</td>
+                            <td>الدقة المتوازنة (تأخذ في الاعتبار عدم التوازن)</td>
                         </tr>
                         <tr>
                             <td><strong>Recall Class 0</strong></td>
-                            <td><span style="color: #10b981; font-weight: 700;">78.20%</span></td>
-                            <td>القدرة على اكتشاف غير المصابين (ممتاز)</td>
+                            <td>66.40%</td>
+                            <td>القدرة على اكتشاف غير المصابين</td>
                         </tr>
                         <tr>
                             <td><strong>Recall Class 1</strong></td>
-                            <td><span style="color: #10b981; font-weight: 700;">62.45%</span></td>
-                            <td>القدرة على اكتشاف ما قبل السكري (جيد جداً)</td>
+                            <td>32.28%</td>
+                            <td>القدرة على اكتشاف ما قبل السكري</td>
                         </tr>
                         <tr>
                             <td><strong>Recall Class 2</strong></td>
-                            <td><span style="color: #10b981; font-weight: 700;">73.25%</span></td>
-                            <td>القدرة على اكتشاف المصابين (ممتاز)</td>
+                            <td>58.33%</td>
+                            <td>القدرة على اكتشاف المصابين</td>
                         </tr>
                         <tr>
                             <td><strong>Precision Class 0</strong></td>
-                            <td><span style="color: #10b981; font-weight: 700;">95.80%</span></td>
-                            <td>دقة التنبؤ بغير المصابين (ممتاز جداً)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Precision Class 1</strong></td>
-                            <td><span style="color: #10b981; font-weight: 700;">32.60%</span></td>
-                            <td>دقة التنبؤ بما قبل السكري (مقبول للكشف المبكر)</td>
+                            <td>94.95%</td>
+                            <td>دقة التنبؤ بغير المصابين</td>
                         </tr>
                         <tr>
                             <td><strong>Precision Class 2</strong></td>
-                            <td><span style="color: #10b981; font-weight: 700;">58.90%</span></td>
-                            <td>دقة التنبؤ بالمصابين (جيد)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>F1-Score Class 0</strong></td>
-                            <td><span style="color: #10b981; font-weight: 700;">86.15%</span></td>
-                            <td>متوسط Precision و Recall للفئة 0 (ممتاز)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>F1-Score Class 1</strong></td>
-                            <td><span style="color: #10b981; font-weight: 700;">42.85%</span></td>
-                            <td>متوسط Precision و Recall للفئة 1 (جيد)</td>
-                        </tr>
-                        <tr>
-                            <td><strong>F1-Score Class 2</strong></td>
-                            <td><span style="color: #10b981; font-weight: 700;">65.25%</span></td>
-                            <td>متوسط Precision و Recall للفئة 2 (جيد جداً)</td>
+                            <td>35.80%</td>
+                            <td>دقة التنبؤ بالمصابين</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div style="background: #d1fae5; border-right: 4px solid #10b981; padding: 20px; border-radius: 10px; margin-top: 20px;">
-                <h4 style="color: #065f46; margin-bottom: 15px;"><i class="fas fa-check-circle"></i> تحليل مقاييس الأداء:</h4>
-                <div style="color: #065f46;">
-                    <p><strong>✅ النموذج يحقق أداءً ممتازاً:</strong></p>
+            <div style="background: #fff3cd; border-right: 4px solid #ffc107; padding: 20px; border-radius: 10px; margin-top: 20px;">
+                <h4 style="color: #856404; margin-bottom: 15px;"><i class="fas fa-exclamation-triangle"></i> تحليل مقاييس الأداء:</h4>
+                <div style="color: #856404;">
+                    <p><strong>لماذا تبدو المقاييس ضعيفة نسبياً؟</strong></p>
                     <ul style="margin-top: 10px; padding-right: 25px; line-height: 1.8;">
-                        <li><strong>Macro-F1: 68.75%</strong> - أداء ممتاز لجميع الفئات</li>
-                        <li><strong>Balanced Accuracy: 71.30%</strong> - دقة متوازنة ممتازة</li>
-                        <li><strong>Overall Accuracy: 78.45%</strong> - دقة إجمالية عالية جداً</li>
-                        <li><strong>Recall Class 1: 62.45%</strong> - يكتشف أكثر من 60% من حالات ما قبل السكري (ممتاز للكشف المبكر)</li>
-                        <li><strong>Recall Class 2: 73.25%</strong> - يكتشف أكثر من 70% من حالات السكري (ممتاز)</li>
-                        <li><strong>Precision Class 0: 95.80%</strong> - دقة عالية جداً في تأكيد عدم الإصابة</li>
-                        <li><strong>Precision Class 2: 58.90%</strong> - دقة جيدة في اكتشاف المصابين</li>
+                        <li><strong>عدم التوازن الشديد في البيانات:</strong> Class 1 (ما قبل السكري) يمثل فقط <strong>1.8%</strong> من البيانات (3,239 من 177,380)</li>
+                        <li><strong>Class 0 هو الأغلبية:</strong> يمثل 84.2% من البيانات، مما يجعل النموذج يميل للتنبؤ به</li>
+                        <li><strong>Recall Class 1 منخفض (32.28%):</strong> النموذج يكتشف فقط ثلث حالات ما قبل السكري - هذه المشكلة الأكبر</li>
+                        <li><strong>النموذج البسيط:</strong> Logistic Regression قد لا يكون كافياً لمشكلة معقدة كهذه</li>
                     </ul>
-                    <p style="margin-top: 15px;"><strong>📊 ملاحظات:</strong></p>
+                    <p style="margin-top: 15px;"><strong>الحلول المقترحة:</strong></p>
                     <ul style="margin-top: 10px; padding-right: 25px; line-height: 1.8;">
-                        <li><strong>Class 1 نادر:</strong> يمثل 1.8% فقط من البيانات، لكن النموذج يتعامل معه بشكل جيد</li>
-                        <li><strong>Precision Class 1: 32.60%</strong> - مقبول للكشف المبكر (من الأفضل اكتشاف الحالات حتى لو كانت بعض التنبؤات خاطئة)</li>
-                        <li><strong>النموذج محسّن:</strong> تم استخدام تقنيات متقدمة لتحسين الأداء</li>
+                        <li><strong>استخدام SMOTE:</strong> لزيادة عينات Class 1 بشكل مصطنع</li>
+                        <li><strong>استخدام XGBoost:</strong> نموذج أقوى من Logistic Regression</li>
+                        <li><strong>ضبط Class Weights:</strong> إعطاء وزن أكبر للفئات النادرة</li>
+                        <li><strong>التوقعات بعد التحسين:</strong> Macro-F1 من 42.78% إلى 55-65%، Recall Class 1 من 32% إلى 50-65%</li>
                     </ul>
                     <p style="margin-top: 15px; font-size: 0.9rem;">
-                        <i class="fas fa-info-circle"></i> النموذج جاهز للاستخدام الفعلي ويوفر تنبؤات موثوقة ودقيقة
+                        <i class="fas fa-info-circle"></i> للمزيد من التفاصيل، راجع ملف <code>PERFORMANCE_ANALYSIS.md</code>
                     </p>
                 </div>
             </div>
@@ -1094,16 +1063,12 @@
                     <div class="label">فئات التنبؤ</div>
                 </div>
                 <div class="stat-item">
-                    <div class="number">68.75%</div>
+                    <div class="number">42.78%</div>
                     <div class="label">Macro-F1 Score</div>
                 </div>
                 <div class="stat-item">
-                    <div class="number">71.30%</div>
+                    <div class="number">52.34%</div>
                     <div class="label">Balanced Accuracy</div>
-                </div>
-                <div class="stat-item">
-                    <div class="number">78.45%</div>
-                    <div class="label">Overall Accuracy</div>
                 </div>
                 <div class="stat-item">
                     <div class="number">99.89%</div>
@@ -1228,18 +1193,16 @@
                 تم تنفيذ نظام متكامل للتنبؤ بمخاطر السكري يوفر:
             </p>
             <ul style="margin-top: 15px; padding-right: 30px; font-size: 1.05rem; line-height: 2;">
-                <li><i class="fas fa-check text-success"></i> تنبؤات دقيقة جداً بناءً على 21 مؤشر صحي (Macro-F1: 68.75%)</li>
-                <li><i class="fas fa-check text-success"></i> اكتشاف ممتاز لما قبل السكري (Recall Class 1: 62.45%)</li>
+                <li><i class="fas fa-check text-success"></i> تنبؤات دقيقة بناءً على 21 مؤشر صحي</li>
                 <li><i class="fas fa-check text-success"></i> واجهة سهلة الاستخدام متعددة اللغات</li>
                 <li><i class="fas fa-check text-success"></i> REST API متكامل مع توثيق تلقائي</li>
                 <li><i class="fas fa-check text-success"></i> لوحة إدارة متقدمة لإدارة النظام</li>
                 <li><i class="fas fa-check text-success"></i> نظام أمان قوي مع JWT و API Keys</li>
                 <li><i class="fas fa-check text-success"></i> إدارة كاملة لدورة حياة النماذج</li>
-                <li><i class="fas fa-check text-success"></i> نموذج محسّن باستخدام XGBoost + SMOTE</li>
             </ul>
-            <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1)); padding: 20px; border-radius: 10px; margin-top: 20px; border-right: 4px solid var(--success-color);">
-                <p style="font-size: 1.15rem; font-weight: 600; color: var(--success-color); margin: 0;">
-                    <i class="fas fa-rocket"></i> النظام جاهز للاستخدام الفعلي مع أداء ممتاز (Overall Accuracy: 78.45%, Balanced Accuracy: 71.30%, Macro-F1: 68.75%) ويساعد بشكل فعال في الكشف المبكر عن مخاطر السكري.
+            <div style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1)); padding: 20px; border-radius: 10px; margin-top: 20px; border-right: 4px solid var(--primary-color);">
+                <p style="font-size: 1.15rem; font-weight: 600; color: var(--primary-color); margin: 0;">
+                    <i class="fas fa-rocket"></i> النظام جاهز للاستخدام الفعلي ويساعد في الكشف المبكر عن مخاطر السكري.
                 </p>
             </div>
         </div>
